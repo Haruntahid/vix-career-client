@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 function Navbar() {
   return (
@@ -46,6 +46,9 @@ function Navbar() {
             <li>
               <NavLink>Profile</NavLink>
             </li>
+            <li>
+              <NavLink>Register</NavLink>
+            </li>
           </ul>
         </div>
         <a className="btn btn-ghost text-3xl font-bold text-btn-color">
@@ -75,10 +78,15 @@ function Navbar() {
           <li>
             <NavLink>Profile</NavLink>
           </li>
+          <li>
+            <NavLink>Register</NavLink>
+          </li>
         </ul>
       </div>
       <div className="navbar-end">
-        <a className="btn bg-btn-color text-white hover:bg-black">Login</a>
+        <Link className="btn bg-btn-color text-white hover:bg-black">
+          Login
+        </Link>
       </div>
     </div>
   );

@@ -1,6 +1,8 @@
 import { Link, NavLink } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 
 function Navbar() {
+  const { user, logOut } = useAuth();
   return (
     <div className="bg-bg-color">
       <div className="navbar text-txt-color container mx-auto py-5">
@@ -32,24 +34,33 @@ function Navbar() {
               <li>
                 <NavLink>All Jobs</NavLink>
               </li>
-              <li>
-                <NavLink>Applied Jobs</NavLink>
-              </li>
-              <li>
-                <NavLink>Add A Job</NavLink>
-              </li>
-              <li>
-                <NavLink>My Jobs</NavLink>
-              </li>
+
+              {user && (
+                <>
+                  <li>
+                    <NavLink>Add A Job</NavLink>
+                  </li>
+                  <li>
+                    <NavLink>My Jobs</NavLink>
+                  </li>
+                  <li>
+                    <NavLink>Applied Jobs</NavLink>
+                  </li>
+                  <li>
+                    <NavLink>Profile</NavLink>
+                  </li>
+                </>
+              )}
+
               <li>
                 <NavLink>Blogs</NavLink>
               </li>
-              <li>
-                <NavLink>Profile</NavLink>
-              </li>
-              <li>
-                <NavLink>Register</NavLink>
-              </li>
+
+              {!user && (
+                <li>
+                  <NavLink>Register</NavLink>
+                </li>
+              )}
             </ul>
           </div>
           <a className="btn btn-ghost text-4xl font-bold text-btn-color">
@@ -64,33 +75,62 @@ function Navbar() {
             <li>
               <NavLink>All Jobs</NavLink>
             </li>
-            <li>
-              <NavLink>Applied Jobs</NavLink>
-            </li>
-            <li>
-              <NavLink>Add A Job</NavLink>
-            </li>
-            <li>
-              <NavLink>My Jobs</NavLink>
-            </li>
+            {user && (
+              <>
+                <li>
+                  <NavLink>Add A Job</NavLink>
+                </li>
+                <li>
+                  <NavLink>My Jobs</NavLink>
+                </li>
+                <li>
+                  <NavLink>Applied Jobs</NavLink>
+                </li>
+                <li>
+                  <NavLink>Profile</NavLink>
+                </li>
+              </>
+            )}
+
             <li>
               <NavLink>Blogs</NavLink>
             </li>
-            <li>
-              <NavLink>Profile</NavLink>
-            </li>
-            <li>
-              <NavLink>Register</NavLink>
-            </li>
+            {!user && (
+              <li>
+                <NavLink>Register</NavLink>
+              </li>
+            )}
           </ul>
         </div>
         <div className="navbar-end">
-          <Link
-            to={"/login"}
-            className="btn bg-btn-color text-white hover:bg-black"
-          >
-            Login
-          </Link>
+          {user ? (
+            <div className="flex items-center">
+              <div
+                className="tooltip tooltip-bottom"
+                data-tip={user?.displayName}
+              >
+                <img
+                  className="h-14 w-14 rounded-full"
+                  src={user?.photoURL}
+                  alt=""
+                />
+              </div>
+
+              <button
+                onClick={logOut}
+                className="btn ml-4 bg-btn-color text-white hover:bg-black"
+              >
+                Logout
+              </button>
+            </div>
+          ) : (
+            <Link
+              to={"/login"}
+              className="btn bg-btn-color text-white hover:bg-black"
+            >
+              Login
+            </Link>
+          )}
         </div>
       </div>
     </div>

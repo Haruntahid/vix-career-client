@@ -2,12 +2,15 @@ import { useState } from "react";
 import { FaKey, FaLink, FaRegEye, FaRegEyeSlash, FaUser } from "react-icons/fa";
 import { IoMdMail } from "react-icons/io";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import useAuth from "../hooks/useAuth";
 
 function Register() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [photo, setPhoto] = useState("");
+  const { registerUser, updateUserProfile, setUser, googleLogin } = useAuth();
 
   // passToogle
   const [password, setPassword] = useState("");
@@ -21,9 +24,53 @@ function Register() {
     setPassword(e.target.value);
   };
 
+  //   google login
+  const handelGoogleLogin = () => {
+    googleLogin().then((result) => {
+      setUser(result.user);
+      navigate(location?.state ? location.state : "/");
+      toast.success("Log in successfully");
+    });
+  };
+
   //   register
-  const handelRegister = (event) => {
+  const handelRegister = async (event) => {
     event.preventDefault();
+    event.preventDefault();
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    // check all the data is filled
+    if (!name || !email || !photo || !password) {
+      toast.error("You must fill all the field");
+      return;
+    }
+
+    // error state empty when all correct
+    setError("");
+
+    registerUser(email, password)
+      .then(() => {
+        updateUserProfile(name, photo).then((result) => {
+          setUser({ ...result?.user, photoURL: photo, displayName: name });
+          event.target.reset();
+          navigate("/");
+          toast.success("Registration Successfully!");
+        });
+      })
+      .catch((error) => {
+        console.error("Error updating user profile:", error);
+        toast.error("Failed to update user profile");
+      })
+      .catch((err) =>
+        setError(
+          err.message.replace(
+            "Firebase: Error (auth/email-already-in-use).",
+            "Email Aleready Exist!"
+          )
+        )
+      );
   };
   return (
     <>
@@ -43,7 +90,10 @@ function Register() {
             <p className="mt-3 text-xl font-semibold text-center text-gray-600 ">
               Get more opportunities
             </p>
-            <div className="flex cursor-pointer items-center justify-center my-5 text-gray-600 transition-colors duration-300 transform border rounded-lg hover:bg-bg-color">
+            <div
+              onClick={handelGoogleLogin}
+              className="flex cursor-pointer items-center justify-center my-5 text-gray-600 transition-colors duration-300 transform border rounded-lg hover:bg-bg-color"
+            >
               <div className="mr-2 py-2">
                 <svg className="w-6 h-6" viewBox="0 0 40 40">
                   <path
@@ -165,6 +215,9 @@ function Register() {
                     )}
                   </span>
                 )}
+              </div>
+              <div>
+                {error && <span className="text-rose-600 mt-4">{error}</span>}
               </div>
               <div className="mt-6">
                 <button

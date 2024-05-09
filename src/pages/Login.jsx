@@ -1,10 +1,14 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IoMdMail } from "react-icons/io";
 import { FaKey, FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { useState } from "react";
+import { toast } from "react-toastify";
+import useAuth from "../hooks/useAuth";
 
 function Login() {
-  const [error, setError] = useState("");
+  const { signIn, googleLogin } = useAuth();
+  const [error, setError, setUser] = useState("");
+  const navigate = useNavigate();
 
   // passToogle
   const [password, setPassword] = useState("");
@@ -18,34 +22,46 @@ function Login() {
     setPassword(e.target.value);
   };
 
-  //   login
-  //   const handelLogin = (e) => {
-  //     e.preventDefault();
-  //     const email = e.target.email.value;
-  //     const password = e.target.password.value;
+  //   google login
+  const handelGoogleLogin = () => {
+    googleLogin().then((result) => {
+      setUser(result.user);
+      navigate(location?.state ? location.state : "/");
+      toast.success("Log in successfully");
+    });
+  };
 
-  //     if (!email || !password) {
-  //       toast.error("You need to provide email and password");
-  //       return;
-  //     }
+  // handel login
+  const handelLogin = (e) => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
 
-  //     loginUser(email, password)
-  //       .then((result) => {
-  //         console.log(result.user);
-  //         e.target.reset();
-  //         // navigate after login
-  //         navigate(location?.state ? location.state : "/");
-  //         toast.success("Log in successfully");
-  //       })
-  //       .catch((err) =>
-  //         setError(
-  //           err.message.replace(
-  //             "Firebase: Error (auth/invalid-credential).",
-  //             "Invalid Credential! Make Sure Your email and password is correct"
-  //           )
-  //         )
-  //       );
-  //   };
+    if (!email || !password) {
+      toast.error("You need to provide email and password");
+      return;
+    }
+
+    // error state empty when all correct
+    setError("");
+
+    signIn(email, password)
+      .then((result) => {
+        console.log(result.user);
+        e.target.reset();
+        // navigate after login
+        navigate(location?.state ? location.state : "/");
+        toast.success("Log in successfully");
+      })
+      .catch((err) =>
+        setError(
+          err.message.replace(
+            "Firebase: Error (auth/invalid-credential).",
+            "Invalid Credential! Make Sure Your email and password is correct"
+          )
+        )
+      );
+  };
 
   return (
     <>
@@ -67,7 +83,10 @@ function Login() {
               Welcome Back Dude!
             </p>
 
-            <div className="flex cursor-pointer items-center justify-center my-5 text-gray-600 transition-colors duration-300 transform border rounded-lg hover:bg-bg-color">
+            <div
+              onClick={handelGoogleLogin}
+              className="flex cursor-pointer items-center justify-center my-5 text-gray-600 transition-colors duration-300 transform border rounded-lg hover:bg-bg-color"
+            >
               <div className="mr-2 py-2">
                 <svg className="w-6 h-6" viewBox="0 0 40 40">
                   <path
@@ -103,7 +122,7 @@ function Login() {
 
               <span className="w-1/5 border-b dark:border-gray-400 lg:w-1/4"></span>
             </div>
-            <form onSubmit="">
+            <form onSubmit={handelLogin}>
               <div className="mt-4">
                 <label
                   className="block mb-2 text-sm font-medium text-gray-600 "

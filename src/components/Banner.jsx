@@ -1,6 +1,6 @@
 function Banner() {
   return (
-    <div className="bg-bg-color pt-5">
+    <div className="pt-10 bg-bg-color">
       <div className="container mx-auto flex items-center">
         <div>
           <p className="text-7xl font-bold leading-[80px]">

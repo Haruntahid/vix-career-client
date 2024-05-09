@@ -4,8 +4,12 @@ import Navbar from "../components/Navbar";
 function MainLayout() {
   return (
     <>
-      <Navbar />
-      <Outlet />
+      <div className="">
+        <div className="">
+          <Navbar />
+          <Outlet />
+        </div>
+      </div>
     </>
   );
 }

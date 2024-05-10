@@ -29,19 +29,19 @@ function Navbar() {
               className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
             >
               <li>
-                <NavLink>Home</NavLink>
+                <NavLink to={"/"}>Home</NavLink>
               </li>
               <li>
-                <NavLink>All Jobs</NavLink>
+                <NavLink to={"/all-jobs"}>All Jobs</NavLink>
               </li>
 
               {user && (
                 <>
                   <li>
-                    <NavLink>Add A Job</NavLink>
+                    <NavLink to={"/add-job"}>Add A Job</NavLink>
                   </li>
                   <li>
-                    <NavLink>My Jobs</NavLink>
+                    <NavLink to={"/my-job"}>My Jobs</NavLink>
                   </li>
                   <li>
                     <NavLink>Applied Jobs</NavLink>
@@ -58,7 +58,7 @@ function Navbar() {
 
               {!user && (
                 <li>
-                  <NavLink>Register</NavLink>
+                  <NavLink to={"/register"}>Register</NavLink>
                 </li>
               )}
             </ul>
@@ -70,18 +70,18 @@ function Navbar() {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1 space-x-3">
             <li>
-              <NavLink>Home</NavLink>
+              <NavLink to={"/"}>Home</NavLink>
             </li>
             <li>
-              <NavLink>All Jobs</NavLink>
+              <NavLink to={"/all-jobs"}>All Jobs</NavLink>
             </li>
             {user && (
               <>
                 <li>
-                  <NavLink>Add A Job</NavLink>
+                  <NavLink to={"/add-job"}>Add A Job</NavLink>
                 </li>
                 <li>
-                  <NavLink>My Jobs</NavLink>
+                  <NavLink to={"/my-job"}>My Jobs</NavLink>
                 </li>
                 <li>
                   <NavLink>Applied Jobs</NavLink>
@@ -97,7 +97,7 @@ function Navbar() {
             </li>
             {!user && (
               <li>
-                <NavLink>Register</NavLink>
+                <NavLink to={"/register"}>Register</NavLink>
               </li>
             )}
           </ul>

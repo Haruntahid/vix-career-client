@@ -6,8 +6,8 @@ import { toast } from "react-toastify";
 import useAuth from "../hooks/useAuth";
 
 function Login() {
-  const { signIn, googleLogin } = useAuth();
-  const [error, setError, setUser] = useState("");
+  const { signIn, googleLogin, setUser } = useAuth();
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   // passToogle

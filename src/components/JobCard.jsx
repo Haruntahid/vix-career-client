@@ -1,7 +1,9 @@
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 function JobCard({ job }) {
   const {
+    _id,
     name,
     job_title,
     job_category,
@@ -38,9 +40,12 @@ function JobCard({ job }) {
           Job Posted By : <span>{name}</span>
         </p>
         <p className="text-xs">Job Applicants : {job_applicants}</p>
-        <button className="btn btn-block bg-btn-color text-white hover:bg-txt-color mt-5">
+        <Link
+          to={`/job/${_id}`}
+          className="btn btn-block bg-btn-color text-white hover:bg-txt-color mt-5"
+        >
           View Details
-        </button>
+        </Link>
       </div>
     </>
   );

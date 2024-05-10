@@ -2,17 +2,89 @@ import { useState } from "react";
 import useAuth from "../hooks/useAuth";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import axios from "axios";
+import Swal from "sweetalert2";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 function AddJob() {
-  const [startDate, setStartDate] = useState(new Date());
   const { user } = useAuth();
+  const [startDate, setStartDate] = useState(new Date());
+  const navigate = useNavigate();
+
+  // date part
+  const today = new Date();
+  const day = today.getDate().toString().padStart(2, "0");
+  const month = (today.getMonth() + 1).toString().padStart(2, "0");
+  const year = today.getFullYear().toString();
+  // Format the date in 'dd/mm/yyyy' format
+  const formattedDate = `${day}/${month}/${year}`;
+
+  // handel Post job
+  const handelPostJob = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const photo = form.photo.value;
+    const job_title = form.job_title.value;
+    const job_category = form.job_category.value;
+    const salary_range = form.salary_range.value;
+    const job_posting_date = form.job_posting_date.value;
+    const application_deadline = startDate;
+    const short_description = form.short_description.value;
+
+    if (
+      !name ||
+      !email ||
+      !photo ||
+      !job_title ||
+      !job_category ||
+      !salary_range ||
+      !job_posting_date ||
+      !application_deadline ||
+      !short_description
+    ) {
+      toast.error("Please Fill all the data");
+      return;
+    }
+
+    const jobData = {
+      name,
+      email,
+      photo,
+      job_title,
+      job_category,
+      salary_range,
+      job_posting_date,
+      application_deadline,
+      short_description,
+      job_applicants: 0,
+    };
+
+    console.log(jobData);
+    axios
+      .post(`${import.meta.env.VITE_API_URL}/all-jobs`, jobData)
+      .then((res) => {
+        if (res.data?.insertedId) {
+          Swal.fire({
+            title: "Success!",
+            text: "Successfully Added Job",
+            icon: "success",
+          });
+          form.reset();
+          navigate("/");
+        }
+      })
+      .catch((err) => console.log(err));
+  };
   return (
     <>
       <h2 className="text-3xl lg:text-6xl text-btn-color font-bold text-center my-5 lg:my-10">
         Post a Job
       </h2>
       <div className="container mx-auto bg-bg-color p-5 rounded-lg">
-        <form onSubmit="" className="space-y-2 lg:space-y-6">
+        <form onSubmit={handelPostJob} className="space-y-2 lg:space-y-6">
           {/* user row*/}
           <div className="flex gap-2 lg:gap-5">
             <div className="w-1/2">
@@ -74,8 +146,8 @@ function AddJob() {
                 <option value="Remote" className="py-2">
                   Remote
                 </option>
-                <option value="Part-Time" className="py-2">
-                  Part-Time
+                <option value="Part Time" className="py-2">
+                  Part Time
                 </option>
                 <option value="Hybrid" className="py-2">
                   Hybrid
@@ -99,22 +171,26 @@ function AddJob() {
                 Job Posting Date:
               </label>
               <input
+                defaultValue={formattedDate}
+                readOnly
                 placeholder="Job Posting Date"
                 type="text"
-                name="rating"
+                name="job_posting_date"
                 className="input input-bordered w-full"
               />
             </div>
             <div className="w-1/2">
-              <label className="text-btn-color block mb-2">
-                Application Deadline:
-              </label>
-              <DatePicker
-                // style={{ width: "100%" }}
-                className="min-w-full rounded-lg border border-gray-300 px-4 lg:h-[48px]"
-                selected={startDate}
-                onChange={(date) => setStartDate(date)}
-              />
+              <div className="w-1/2">
+                <label className="text-btn-color block mb-2">
+                  Application Deadline:
+                </label>
+                <DatePicker
+                  dateFormat="dd/MM/yyyy"
+                  className="min-w-full flex rounded-lg border border-gray-300 px-4 lg:h-[48px]"
+                  selected={startDate}
+                  onChange={(date) => setStartDate(date)}
+                />
+              </div>
             </div>
           </div>
           {/* row-4 */}
@@ -132,7 +208,7 @@ function AddJob() {
 
           <div className="text-center">
             <input
-              className="btn px-6 py-2 rounded-lg w-full lg:w-60 mt-5 bg-rose-600 hover:bg-inherit border border-rose-600 hover:text-white"
+              className="btn px-6 py-2 rounded-lg w-full lg:w-60 mt-5 bg-btn-color hover:bg-inherit border border-btn-color text-white hover:bg-txt-color"
               type="submit"
               value="Add"
             />

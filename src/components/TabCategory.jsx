@@ -1,7 +1,16 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
+import JobCard from "./JobCard";
 
 function TabCategory() {
+  const [jobs, setJobs] = useState([]);
+  useEffect(() => {
+    axios(`${import.meta.env.VITE_API_URL}/all-jobs`).then((res) =>
+      setJobs(res.data)
+    );
+  }, []);
   return (
     <div className="mt-20 container mx-auto">
       <h1 className="text-2xl font-semibold text-center text-txt-color capitalize lg:text-4xl ">
@@ -24,16 +33,40 @@ function TabCategory() {
         </div>
 
         <TabPanel>
-          <h2>Any content 1</h2>
+          <div className="grid grid-cols-3 gap-5 mt-6">
+            {jobs
+              .filter((j) => j.job_category === "On Site")
+              .map((job) => (
+                <JobCard key={job._id} job={job} />
+              ))}
+          </div>
         </TabPanel>
         <TabPanel>
-          <h2>Any content 2</h2>
+          <div className="grid grid-cols-3 gap-5 mt-6">
+            {jobs
+              .filter((j) => j.job_category === "Remote")
+              .map((job) => (
+                <JobCard key={job._id} job={job} />
+              ))}
+          </div>
         </TabPanel>
         <TabPanel>
-          <h2>Any content 2</h2>
+          <div className="grid grid-cols-3 gap-5 mt-6">
+            {jobs
+              .filter((j) => j.job_category === "Hybrid")
+              .map((job) => (
+                <JobCard key={job._id} job={job} />
+              ))}
+          </div>
         </TabPanel>
         <TabPanel>
-          <h2>Any content 2</h2>
+          <div className="grid grid-cols-3 gap-5 mt-6">
+            {jobs
+              .filter((j) => j.job_category === "Part Time")
+              .map((job) => (
+                <JobCard key={job._id} job={job} />
+              ))}
+          </div>
         </TabPanel>
       </Tabs>
     </div>

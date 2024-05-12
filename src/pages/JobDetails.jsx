@@ -1,8 +1,10 @@
 import { useLoaderData } from "react-router-dom";
 import { MdVerifiedUser } from "react-icons/md";
+import useAuth from "../hooks/useAuth";
 
 function JobDetails() {
   const job = useLoaderData();
+  const { user } = useAuth();
   const {
     name,
     photo,
@@ -27,9 +29,72 @@ function JobDetails() {
             </div>
           </div>
           <div>
-            <button className="btn bg-btn-color text-white hover:bg-txt-color">
+            <button
+              className="btn bg-btn-color text-white hover:bg-txt-color"
+              onClick={() => document.getElementById("my_modal_5").showModal()}
+            >
               Apply
             </button>
+
+            {/* modal */}
+            <dialog
+              id="my_modal_5"
+              className="modal modal-bottom sm:modal-middle"
+            >
+              <div className="modal-box lg:w-11/12 lg:max-w-5xl">
+                <h3 className="font-bold text-lg text-center">
+                  You are Applying For{" "}
+                  <span className="text-btn-color">{job_title}!</span>
+                </h3>
+                {/* form */}
+                <div>
+                  <form action="">
+                    <div className="flex gap-2 lg:gap-5">
+                      <div className="w-1/2">
+                        <label className="text-btn-color block mb-2">
+                          Name:
+                        </label>
+                        <input
+                          type="text"
+                          placeholder="Name"
+                          name="name"
+                          defaultValue={user.displayName}
+                          readOnly
+                          className="input input-bordered w-full"
+                        />
+                      </div>
+                      <div className="w-1/2">
+                        <label className="text-btn-color block mb-2">
+                          Email:
+                        </label>
+                        <input
+                          placeholder="Email"
+                          type="email"
+                          name="email"
+                          value={user.email}
+                          className="input input-bordered w-full"
+                          readOnly
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <input
+                        type="submit"
+                        className="btn bg-btn-color"
+                        value="Submit Application"
+                      />
+                    </div>
+                  </form>
+                </div>
+                <div className="modal-action">
+                  <form method="dialog">
+                    <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                      ✕
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </dialog>
           </div>
         </div>
       </div>

@@ -10,7 +10,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <>
     <AuthProvider>
       <RouterProvider router={router} />
-      <ToastContainer autoClose={2000} />
+      <ToastContainer autoClose={2000} className="z-50" />
     </AuthProvider>
   </>
 );

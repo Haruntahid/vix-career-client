@@ -1,11 +1,16 @@
 import { useLoaderData } from "react-router-dom";
 import { MdVerifiedUser } from "react-icons/md";
 import useAuth from "../hooks/useAuth";
+import axios from "axios";
+import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 function JobDetails() {
   const job = useLoaderData();
+
   const { user } = useAuth();
   const {
+    _id,
     name,
     photo,
     job_title,
@@ -15,7 +20,53 @@ function JobDetails() {
     application_deadline,
     job_applicants,
     short_description,
-  } = job;
+  } = job || {};
+
+  //   handel application
+  const handleApplication = (e) => {
+    e.preventDefault();
+
+    const form = e.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const link = form.link.value;
+    const jobId = _id;
+    const photoURL = photo;
+    const jobTitle = job_title;
+    const jobCategory = job_category;
+
+    if (user?.email === job?.email) {
+      return toast.error("Action not permitted!");
+    }
+
+    if (!link) {
+      toast.error("You Need Provide Resume Link");
+      return;
+    }
+
+    const applyData = {
+      jobId,
+      photoURL,
+      jobTitle,
+      jobCategory,
+      name,
+      email,
+      link,
+    };
+
+    axios
+      .post(`${import.meta.env.VITE_API_URL}/job-apply`, applyData)
+      .then((res) => {
+        if (res.data.insertedId) {
+          Swal.fire({
+            title: "Success!",
+            text: "Successfully Applied Job",
+            icon: "success",
+          });
+        }
+      })
+      .catch((err) => console.log(err));
+  };
   return (
     <div className="container mx-auto">
       <p className="text-3xl font-semibold my-5">Job Description</p>
@@ -36,19 +87,19 @@ function JobDetails() {
               Apply
             </button>
 
-            {/* modal */}
+            {/*----------------------- modal------------------------------ */}
             <dialog
               id="my_modal_5"
               className="modal modal-bottom sm:modal-middle"
             >
               <div className="modal-box lg:w-11/12 lg:max-w-5xl">
-                <h3 className="font-bold text-lg text-center">
+                <h3 className="font-bold text-3xl my-10 text-center">
                   You are Applying For{" "}
                   <span className="text-btn-color">{job_title}!</span>
                 </h3>
                 {/* form */}
                 <div>
-                  <form action="">
+                  <form action="" onSubmit={handleApplication}>
                     <div className="flex gap-2 lg:gap-5">
                       <div className="w-1/2">
                         <label className="text-btn-color block mb-2">
@@ -77,10 +128,23 @@ function JobDetails() {
                         />
                       </div>
                     </div>
-                    <div>
+                    {/* row-2 */}
+                    <div className="my-8">
+                      <label className="text-btn-color block mb-2">
+                        Submit Resume Link:
+                      </label>
+                      <input
+                        placeholder="Submit Resume Link"
+                        type="text"
+                        name="link"
+                        className="input input-bordered w-full"
+                      />
+                    </div>
+                    {/* btn */}
+                    <div className="text-center">
                       <input
                         type="submit"
-                        className="btn bg-btn-color"
+                        className="btn bg-btn-color hover:bg-txt-color text-white"
                         value="Submit Application"
                       />
                     </div>

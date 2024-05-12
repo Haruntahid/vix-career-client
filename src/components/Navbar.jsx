@@ -65,10 +65,10 @@ function Navbar() {
                     <NavLink to={"/my-job"}>My Jobs</NavLink>
                   </li>
                   <li>
-                    <NavLink>Applied Jobs</NavLink>
+                    <NavLink to={"/applied-jobs"}>Applied Jobs</NavLink>
                   </li>
                   <li>
-                    <NavLink>Profile</NavLink>
+                    <NavLink to={"/profile"}>Profile</NavLink>
                   </li>
                 </>
               )}
@@ -105,10 +105,10 @@ function Navbar() {
                   <NavLink to={"/my-job"}>My Jobs</NavLink>
                 </li>
                 <li>
-                  <NavLink>Applied Jobs</NavLink>
+                  <NavLink to={"/applied-jobs"}>Applied Jobs</NavLink>
                 </li>
                 <li>
-                  <NavLink>Profile</NavLink>
+                  <NavLink to={"/profile"}>Profile</NavLink>
                 </li>
               </>
             )}

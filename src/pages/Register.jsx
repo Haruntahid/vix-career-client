@@ -4,6 +4,7 @@ import { IoMdMail } from "react-icons/io";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import useAuth from "../hooks/useAuth";
+import axios from "axios";
 
 function Register() {
   const [error, setError] = useState("");
@@ -27,6 +28,15 @@ function Register() {
   //   google login
   const handelGoogleLogin = () => {
     googleLogin().then((result) => {
+      axios
+        .post(
+          `${import.meta.env.VITE_API_URL}/jwt`,
+          {
+            email: result?.user?.email,
+          },
+          { withCredentials: true }
+        )
+        .then((res) => console.log(res.data));
       setUser(result.user);
       navigate(location?.state ? location.state : "/");
       toast.success("Log in successfully");
@@ -51,7 +61,16 @@ function Register() {
     setError("");
 
     registerUser(email, password)
-      .then(() => {
+      .then((result) => {
+        axios
+          .post(
+            `${import.meta.env.VITE_API_URL}/jwt`,
+            {
+              email: result?.user?.email,
+            },
+            { withCredentials: true }
+          )
+          .then((res) => console.log(res.data));
         updateUserProfile(name, photo).then((result) => {
           setUser({ ...result?.user, photoURL: photo, displayName: name });
           event.target.reset();

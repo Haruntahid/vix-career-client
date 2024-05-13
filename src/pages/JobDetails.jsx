@@ -11,6 +11,7 @@ function JobDetails() {
   const { user } = useAuth();
   const {
     _id,
+    email,
     name,
     photo,
     job_title,
@@ -62,6 +63,7 @@ function JobDetails() {
             title: "Success!",
             text: "Successfully Applied Job",
             icon: "success",
+            position: "top",
           });
         }
       })
@@ -217,30 +219,45 @@ function JobDetails() {
           </ul>
         </div>
         {/* sidebar */}
-        <div className="w-2/5 border border-btn-color p-5 ">
-          <p className="text-2xl font-bold text-center">About this role</p>
-          <div className="space-y-4">
-            <p className="px-5 py-1 rounded-full mt-5 bg-btn-color">
+        <div className="w-2/5 border-2 rounded-2xl border-btn-color p-5 ">
+          <div className="divider">
+            <p className="text-2xl font-bold text-center">About This Role</p>
+          </div>
+          <div className="space-y-2">
+            <span className="px-5 py-1 rounded-full inline-block my-5 bg-btn-color">
               {job_applicants} Applied
-            </p>
+            </span>
+            <div className="divider"></div>
             <p className="flex justify-between">
               Apply Before{" "}
-              <p className="font-semibold">
+              <span className="font-semibold">
                 {new Date(application_deadline).toLocaleDateString("en-GB", {
                   day: "2-digit",
                   month: "2-digit",
                   year: "numeric",
                 })}
-              </p>
+              </span>
             </p>
+            <div className="divider"></div>
             <p className="flex justify-between">
-              Job Posted On <p className="font-semibold">{job_posting_date}</p>
+              Job Posted On{" "}
+              <span className="font-semibold">{job_posting_date}</span>
             </p>
+            <div className="divider"></div>
             <p className="flex justify-between">
-              Job Category<p className="font-semibold">{job_category}</p>
+              Job Category<span className="font-semibold">{job_category}</span>
             </p>
+            <div className="divider"></div>
             <p className="flex justify-between">
-              Salary <p className="font-semibold">{salary_range}</p>
+              Salary <span className="font-semibold">{salary_range}</span>
+            </p>
+          </div>
+          <div className="mt-10">
+            <div className="divider">
+              <p className="text-2xl font-bold text-center">Contact Info</p>
+            </div>
+            <p className="flex justify-between">
+              Email <span className="font-semibold">{email}</span>
             </p>
           </div>
         </div>

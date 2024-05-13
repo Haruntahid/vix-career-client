@@ -17,7 +17,6 @@ function AppliedJobs() {
     getData();
   }, [user?.email]);
 
-  console.log(jobs);
   return (
     <>
       <section className="container px-4 mx-auto pt-12">

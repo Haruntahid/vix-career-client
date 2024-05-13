@@ -4,6 +4,7 @@ import { FaKey, FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import useAuth from "../hooks/useAuth";
+import axios from "axios";
 
 function Login() {
   const { signIn, googleLogin, setUser } = useAuth();
@@ -24,11 +25,24 @@ function Login() {
 
   //   google login
   const handelGoogleLogin = () => {
-    googleLogin().then((result) => {
-      setUser(result.user);
-      navigate(location?.state ? location.state : "/");
-      toast.success("Log in successfully");
-    });
+    googleLogin()
+      .then((result) => {
+        axios
+          .post(
+            `${import.meta.env.VITE_API_URL}/jwt`,
+            {
+              email: result?.user?.email,
+            },
+            { withCredentials: true }
+          )
+          .then((res) => console.log(res.data));
+        setUser(result.user);
+        navigate(location?.state ? location.state : "/");
+        toast.success("Log in successfully");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   // handel login
@@ -48,6 +62,15 @@ function Login() {
     signIn(email, password)
       .then((result) => {
         console.log(result.user);
+        axios
+          .post(
+            `${import.meta.env.VITE_API_URL}/jwt`,
+            {
+              email: result?.user?.email,
+            },
+            { withCredentials: true }
+          )
+          .then((res) => console.log(res.data));
         e.target.reset();
         // navigate after login
         navigate(location?.state ? location.state : "/");

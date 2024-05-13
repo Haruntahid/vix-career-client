@@ -74,7 +74,7 @@ function Navbar() {
               )}
 
               <li>
-                <NavLink>Blogs</NavLink>
+                <NavLink to={"/blog"}>Blogs</NavLink>
               </li>
 
               {!user && (
@@ -114,7 +114,7 @@ function Navbar() {
             )}
 
             <li>
-              <NavLink>Blogs</NavLink>
+              <NavLink to={"/blog"}>Blogs</NavLink>
             </li>
             {!user && (
               <li>

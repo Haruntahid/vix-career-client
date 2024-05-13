@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 
 function AppliedJobs() {
   const { user } = useAuth();
+  console.log(user);
   const [jobs, setJobs] = useState([]);
 
   useEffect(() => {

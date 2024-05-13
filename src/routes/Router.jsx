@@ -12,6 +12,7 @@ import UpdateJob from "../pages/UpdateJob";
 import ErrorPage from "../pages/ErrorPage";
 import Profile from "../pages/Profile";
 import AppliedJobs from "../pages/AppliedJobs";
+import Blog from "../pages/Blog";
 
 export const router = createBrowserRouter([
   {
@@ -45,7 +46,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/profile",
-        element: <Profile />,
+        element: (
+          <PrivateRoute>
+            <Profile />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/all-jobs",
@@ -74,6 +79,10 @@ export const router = createBrowserRouter([
       {
         path: "/applied-jobs",
         element: <AppliedJobs />,
+      },
+      {
+        path: "/blog",
+        element: <Blog />,
       },
     ],
   },

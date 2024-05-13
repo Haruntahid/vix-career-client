@@ -72,6 +72,7 @@ function Register() {
           )
           .then((res) => console.log(res.data));
         updateUserProfile(name, photo).then((result) => {
+          console.log(result);
           setUser({ ...result?.user, photoURL: photo, displayName: name });
           event.target.reset();
           navigate("/");

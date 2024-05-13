@@ -1,4 +1,5 @@
 import Banner from "../components/Banner";
+import Recommanded from "../components/Recommanded";
 import TabCategory from "../components/TabCategory";
 
 function Home() {
@@ -6,6 +7,7 @@ function Home() {
     <>
       <Banner />
       <TabCategory />
+      <Recommanded />
     </>
   );
 }

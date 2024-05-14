@@ -1,4 +1,9 @@
+import BlogCard from "../components/BlogCard";
+import { useLoaderData } from "react-router-dom";
+// import { useState } from "react";
 function Blog() {
+  const blogs = useLoaderData();
+  console.log(blogs);
   return (
     <>
       <div className="container mx-auto">
@@ -12,6 +17,15 @@ function Blog() {
             alt=""
           />
         </div>
+      </div>
+      {/* cards */}
+      <p className="text-6xl text-btn-color text-center font-bold mt-20 mb-10">
+        Blogs
+      </p>
+      <div className="space-y-5">
+        {blogs.map((blog) => (
+          <BlogCard key={blog._id} blog={blog} />
+        ))}
       </div>
     </>
   );

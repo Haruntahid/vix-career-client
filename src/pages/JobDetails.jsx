@@ -1,12 +1,15 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import { MdVerifiedUser } from "react-icons/md";
 import useAuth from "../hooks/useAuth";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
+import { useState } from "react";
 
 function JobDetails() {
+  const [error, setError] = useState("");
   const job = useLoaderData();
+  const navigate = useNavigate();
 
   const { user } = useAuth();
   const {
@@ -36,11 +39,24 @@ function JobDetails() {
     const jobTitle = job_title;
     const jobCategory = job_category;
 
+    setError("");
+
+    // Check if the application deadline is over
+    const deadline = new Date(application_deadline);
+    const today = new Date();
+
+    if (deadline < today) {
+      setError("Application deadline is over");
+      return;
+    }
+
     if (user?.email === job?.email) {
+      setError("You can't Apply on Your Posted job");
       return toast.error("Action not permitted!");
     }
 
     if (!link) {
+      setError("You Need Provide Resume Link");
       toast.error("You Need Provide Resume Link");
       return;
     }
@@ -59,15 +75,18 @@ function JobDetails() {
       .post(`${import.meta.env.VITE_API_URL}/job-apply`, applyData)
       .then((res) => {
         if (res.data.insertedId) {
+          navigate("/applied-jobs");
           Swal.fire({
             title: "Success!",
             text: "Successfully Applied Job",
             icon: "success",
-            position: "top",
           });
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        setError(err.response.data);
+      });
   };
   return (
     <div className="container mx-auto">
@@ -142,7 +161,23 @@ function JobDetails() {
                         className="input input-bordered w-full"
                       />
                     </div>
+                    <div>
+                      <p>
+                        Application Deadline :{" "}
+                        {new Date(application_deadline).toLocaleDateString(
+                          "en-GB",
+                          {
+                            day: "2-digit",
+                            month: "2-digit",
+                            year: "numeric",
+                          }
+                        )}
+                      </p>
+                    </div>
                     {/* btn */}
+                    <p className="text-rose-600 font-xl text-center my-5">
+                      {error}
+                    </p>
                     <div className="text-center">
                       <input
                         type="submit"
@@ -154,7 +189,10 @@ function JobDetails() {
                 </div>
                 <div className="modal-action">
                   <form method="dialog">
-                    <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                    <button
+                      className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+                      onClick={() => setError("")}
+                    >
                       ✕
                     </button>
                   </form>

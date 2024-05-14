@@ -13,6 +13,7 @@ import ErrorPage from "../pages/ErrorPage";
 import Profile from "../pages/Profile";
 import AppliedJobs from "../pages/AppliedJobs";
 import Blog from "../pages/Blog";
+import BlogDetails from "../components/BlogDetails";
 
 export const router = createBrowserRouter([
   {
@@ -85,8 +86,15 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/blog",
+        path: "/blogs",
         element: <Blog />,
+        loader: () => fetch(`${import.meta.env.VITE_API_URL}/blogs`),
+      },
+      {
+        path: "/blogs/:id",
+        element: <BlogDetails />,
+        loader: ({ params }) =>
+          fetch(`${import.meta.env.VITE_API_URL}/blog/${params.id}`),
       },
     ],
   },

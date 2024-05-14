@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 function AddJob() {
   const { user } = useAuth();
+  console.log(user);
   const [startDate, setStartDate] = useState(new Date());
   const navigate = useNavigate();
 
@@ -73,7 +74,7 @@ function AddJob() {
             icon: "success",
           });
           form.reset();
-          navigate("/");
+          navigate("/my-job");
         }
       })
       .catch((err) => console.log(err));
@@ -104,7 +105,7 @@ function AddJob() {
                 placeholder="Email"
                 type="email"
                 name="email"
-                value={user.email}
+                defaultValue={user.email}
                 className="input input-bordered w-full"
                 readOnly
               />
@@ -118,6 +119,7 @@ function AddJob() {
                 type="text"
                 placeholder="Picture URL of the Job Banner"
                 name="photo"
+                defaultValue={user.photoURL}
                 className="input input-bordered w-full"
               />
             </div>

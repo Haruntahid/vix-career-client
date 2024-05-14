@@ -74,7 +74,7 @@ function Navbar() {
               )}
 
               <li>
-                <NavLink to={"/blog"}>Blogs</NavLink>
+                <NavLink to={"/blogs"}>Blogs</NavLink>
               </li>
 
               {!user && (
@@ -84,9 +84,12 @@ function Navbar() {
               )}
             </ul>
           </div>
-          <a className="btn btn-ghost text-4xl font-bold text-btn-color">
+          <Link
+            to={"/"}
+            className="btn btn-ghost text-4xl font-bold text-btn-color"
+          >
             VixCareer
-          </a>
+          </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1 space-x-3">
@@ -114,7 +117,7 @@ function Navbar() {
             )}
 
             <li>
-              <NavLink to={"/blog"}>Blogs</NavLink>
+              <NavLink to={"/blogs"}>Blogs</NavLink>
             </li>
             {!user && (
               <li>

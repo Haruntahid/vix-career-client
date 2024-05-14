@@ -60,37 +60,27 @@ function Register() {
     // error state empty when all correct
     setError("");
 
-    registerUser(email, password)
-      .then((result) => {
-        axios
-          .post(
-            `${import.meta.env.VITE_API_URL}/jwt`,
-            {
-              email: result?.user?.email,
-            },
-            { withCredentials: true }
-          )
-          .then((res) => console.log(res.data));
-        updateUserProfile(name, photo).then((result) => {
-          console.log(result);
-          setUser({ ...result?.user, photoURL: photo, displayName: name });
-          event.target.reset();
-          navigate("/");
-          toast.success("Registration Successfully!");
-        });
-      })
-      .catch((error) => {
-        console.error("Error updating user profile:", error);
-        toast.error("Failed to update user profile");
-      })
-      .catch((err) =>
-        setError(
-          err.message.replace(
-            "Firebase: Error (auth/email-already-in-use).",
-            "Email Aleready Exist!"
-          )
-        )
+    try {
+      //2. User Registration
+      const result = await registerUser(email, password);
+
+      await updateUserProfile(name, photo);
+      // Optimistic UI Update
+      setUser({ ...result?.user, photoURL: photo, displayName: name });
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_API_URL}/jwt`,
+        {
+          email: result?.user?.email,
+        },
+        { withCredentials: true }
       );
+      console.log(data);
+      navigate("/");
+      toast.success("Signup Successful");
+    } catch (err) {
+      console.log(err);
+      toast.error(err?.message);
+    }
   };
   return (
     <>

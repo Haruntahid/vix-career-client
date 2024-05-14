@@ -60,7 +60,7 @@ function AppliedJobs() {
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="bg-bg-color divide-y divide-gray-200 ">
+                  <tbody className="bg-bg-color divide-y divide-btn-color">
                     {jobs.map((job) => (
                       <tr key={job._id}>
                         <td className="px-4 py-4 whitespace-nowrap">

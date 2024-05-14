@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 function AppliedJobs() {
   const { user } = useAuth();
-  console.log(user);
+  console.log(user.email);
   const [jobs, setJobs] = useState([]);
 
   useEffect(() => {
@@ -21,12 +21,10 @@ function AppliedJobs() {
   return (
     <>
       <section className="container px-4 mx-auto pt-12">
-        <div className="flex items-center gap-x-3">
-          <h2 className="text-lg font-medium text-gray-800 ">
-            My Applied Jobs
-          </h2>
+        <div className="flex items-center justify-center gap-x-3">
+          <h2 className="text-4xl font-bold text-gray-800 ">My Applied Jobs</h2>
 
-          <span className="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full ">
+          <span className="px-3 py-1 text-xs text-white bg-btn-color rounded-full ">
             {jobs.length} Job
           </span>
         </div>

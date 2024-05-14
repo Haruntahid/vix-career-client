@@ -78,7 +78,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/applied-jobs",
-        element: <AppliedJobs />,
+        element: (
+          <PrivateRoute>
+            <AppliedJobs />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/blog",

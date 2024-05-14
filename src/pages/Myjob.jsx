@@ -52,7 +52,9 @@ function Myjob() {
     <>
       <section className="container px-4 mx-auto pt-12">
         <div className="flex items-center justify-center gap-x-3">
-          <h2 className="text-4xl font-bold text-gray-800 ">My Posted Jobs</h2>
+          <h2 className="text-2xl lg:text-4xl font-bold text-gray-800">
+            My Posted Jobs
+          </h2>
 
           <span className="px-3 py-1 text-xs text-white bg-btn-color rounded-full ">
             {jobs.length} Job
@@ -133,14 +135,18 @@ function Myjob() {
                           <div className="flex items-center gap-x-2">
                             <p
                               className={`px-3 py-1 ${
-                                job.job_category === "Web Development" &&
-                                "text-blue-500 bg-blue-100/60"
+                                job.job_category === "On Site" &&
+                                "text-blue-700 bg-blue-100/60"
                               } ${
-                                job.job_category === "Graphics Design" &&
-                                "text-emerald-500 bg-emerald-100/60"
+                                job.job_category === "Remote" &&
+                                "text-emerald-700 bg-emerald-100/60"
                               } ${
-                                job.job_category === "Digital Marketing" &&
-                                "text-pink-500 bg-pink-100/60"
+                                job.job_category === "Hybrid" &&
+                                "text-pink-700 bg-pink-100/60"
+                              } 
+                              } ${
+                                job.job_category === "Part Time" &&
+                                "text-orange-700 bg-orange-100/60"
                               } text-xs  rounded-full`}
                             >
                               {job.job_category}
@@ -151,7 +157,7 @@ function Myjob() {
                           <div className="flex items-center gap-x-6">
                             <button
                               onClick={() => handelDelete(job._id)}
-                              className="text-gray-500 transition-colors duration-200   hover:text-red-500 focus:outline-none"
+                              className="text-gray-500 transition-colors duration-200 hover:text-red-800 focus:outline-none"
                             >
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -171,7 +177,7 @@ function Myjob() {
 
                             <Link
                               to={`/update/${job._id}`}
-                              className="text-gray-500 transition-colors duration-200   hover:text-yellow-500 focus:outline-none"
+                              className="text-gray-500 transition-colors duration-200hover:text-yellow-800 focus:outline-none"
                             >
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"

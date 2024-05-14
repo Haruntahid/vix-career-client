@@ -1,13 +1,13 @@
 function Banner() {
   return (
-    <div className="pt-10 bg-bg-color">
-      <div className="container mx-auto flex items-center">
+    <div className="pt-5 lg:pt-10 bg-bg-color">
+      <div className="container mx-auto flex flex-col lg:flex-row items-center px-3">
         <div>
-          <p className="text-7xl font-bold leading-[80px]">
+          <p className="text-4xl lg:text-7xl font-bold lg:leading-[80px]">
             Find the job of <br /> your{" "}
             <span className="text-btn-color">Dreams</span>
           </p>
-          <p className="text-xl mt-6 w-3/4">
+          <p className="lg:text-xl mt-6 w-3/4">
             Find You New Job Today! New Job Postings Everyday just for you,
             browse the job you want and apply wherever you want
           </p>

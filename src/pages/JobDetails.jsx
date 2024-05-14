@@ -90,19 +90,21 @@ function JobDetails() {
   };
   return (
     <div className="container mx-auto">
-      <p className="text-3xl font-semibold my-5">Job Description</p>
-      <div className="bg-bg-color p-8 rounded-xl">
-        <div className="bg-white p-5 flex justify-between items-center">
-          <div className="flex gap-10">
+      <p className="text-2xl text-center lg:text-start lg:text-4xl font-semibold my-5">
+        Job Description
+      </p>
+      <div className="bg-bg-color p-4 lg:p-8 rounded-xl">
+        <div className="bg-white p-5 flex flex-col lg:flex-row justify-between items-center">
+          <div className="flex flex-col lg:flex-row gap-3 items-center lg:gap-10">
             <img src={photo} className="w-24 h-24" alt="" />
-            <div>
+            <div className="text-center lg:text-start">
               <p className="text-3xl font-bold my-3">{job_title}</p>
               <p>Job Posted By : {name}</p>
             </div>
           </div>
           <div>
             <button
-              className="btn bg-btn-color text-white hover:bg-txt-color"
+              className="btn bg-btn-color mt-5 lg:mt-0 text-white hover:bg-txt-color"
               onClick={() => document.getElementById("my_modal_5").showModal()}
             >
               Apply
@@ -121,8 +123,8 @@ function JobDetails() {
                 {/* form */}
                 <div>
                   <form action="" onSubmit={handleApplication}>
-                    <div className="flex gap-2 lg:gap-5">
-                      <div className="w-1/2">
+                    <div className="flex flex-col lg:flex-row gap-2 lg:gap-5">
+                      <div className="w-full lg:w-1/2">
                         <label className="text-btn-color block mb-2">
                           Name:
                         </label>
@@ -135,7 +137,7 @@ function JobDetails() {
                           className="input input-bordered w-full"
                         />
                       </div>
-                      <div className="w-1/2">
+                      <div className="w-full lg:w-1/2">
                         <label className="text-btn-color block mb-2">
                           Email:
                         </label>
@@ -204,8 +206,8 @@ function JobDetails() {
       </div>
 
       {/* description section */}
-      <div className="flex mt-10 gap-10">
-        <div className="w-3/5">
+      <div className="flex flex-col-reverse lg:flex-row mt-5 lg:mt-10 gap-8 lg:gap-10">
+        <div className="w-full lg:w-3/5 px-3">
           <p className="text-2xl font-bold mb-3">Description</p>
           <p>{short_description}</p>
           <div className="my-10">
@@ -257,7 +259,7 @@ function JobDetails() {
           </ul>
         </div>
         {/* sidebar */}
-        <div className="w-2/5 border-2 rounded-2xl border-btn-color p-5 ">
+        <div className="w-full lg:w-2/5 border-2 rounded-2xl border-btn-color p-5">
           <div className="divider">
             <p className="text-2xl font-bold text-center">About This Role</p>
           </div>

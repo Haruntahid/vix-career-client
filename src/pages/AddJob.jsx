@@ -87,8 +87,8 @@ function AddJob() {
       <div className="container mx-auto bg-bg-color p-5 rounded-lg shadow-2xl">
         <form onSubmit={handelPostJob} className="space-y-2 lg:space-y-6">
           {/* user row*/}
-          <div className="flex gap-2 lg:gap-5">
-            <div className="w-1/2">
+          <div className="flex flex-col lg:flex-row gap-2 lg:gap-5">
+            <div className="w-full lg:w-1/2">
               <label className="text-btn-color block mb-2">Name:</label>
               <input
                 type="text"
@@ -99,7 +99,7 @@ function AddJob() {
                 className="input input-bordered w-full"
               />
             </div>
-            <div className="w-1/2">
+            <div className="w-full lg:w-1/2">
               <label className="text-btn-color block mb-2">Email:</label>
               <input
                 placeholder="Email"
@@ -112,18 +112,17 @@ function AddJob() {
             </div>
           </div>
           {/* row 1 */}
-          <div className="flex gap-2 lg:gap-5">
-            <div className="w-1/2">
+          <div className="flex flex-col lg:flex-row gap-2 lg:gap-5">
+            <div className="w-full lg:w-1/2">
               <label className="text-btn-color block mb-2">PhotoURL:</label>
               <input
                 type="text"
                 placeholder="Picture URL of the Job Banner"
                 name="photo"
-                defaultValue={user.photoURL}
                 className="input input-bordered w-full"
               />
             </div>
-            <div className="w-1/2">
+            <div className="w-full lg:w-1/2">
               <label className="text-btn-color block mb-2">Job Title:</label>
               <input
                 type="text"
@@ -134,8 +133,8 @@ function AddJob() {
             </div>
           </div>
           {/* row 2 */}
-          <div className="flex gap-2 lg:gap-5">
-            <div className="w-1/2">
+          <div className="flex flex-col lg:flex-row gap-2 lg:gap-5">
+            <div className="w-full lg:w-1/2">
               <label className="text-btn-color block mb-2">Job Category:</label>
               <select
                 id="Job Category"
@@ -156,7 +155,7 @@ function AddJob() {
                 </option>
               </select>
             </div>
-            <div className="w-1/2">
+            <div className="w-full lg:w-1/2">
               <label className="text-btn-color block mb-2">Salary range:</label>
               <input
                 placeholder="Salary range"
@@ -167,8 +166,8 @@ function AddJob() {
             </div>
           </div>
           {/* row 3 */}
-          <div className="flex gap-2 lg:gap-5">
-            <div className="w-1/2">
+          <div className="flex flex-col lg:flex-row gap-2 lg:gap-5">
+            <div className="w-full lg:w-1/2">
               <label className="text-btn-color block mb-2">
                 Job Posting Date:
               </label>
@@ -181,14 +180,14 @@ function AddJob() {
                 className="input input-bordered w-full"
               />
             </div>
-            <div className="w-1/2">
-              <div className="w-1/2">
+            <div className="w-full lg:w-1/2">
+              <div className="w-full lg:w-1/2">
                 <label className="text-btn-color block mb-2">
                   Application Deadline:
                 </label>
                 <DatePicker
                   dateFormat="dd/MM/yyyy"
-                  className="min-w-full flex rounded-lg border border-gray-300 px-4 lg:h-[48px]"
+                  className="min-w-full flex rounded-lg border border-gray-300 px-4 h-[48px]"
                   selected={startDate}
                   onChange={(date) => setStartDate(date)}
                 />

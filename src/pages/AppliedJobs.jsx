@@ -22,7 +22,9 @@ function AppliedJobs() {
     <>
       <section className="container px-4 mx-auto pt-12">
         <div className="flex items-center justify-center gap-x-3">
-          <h2 className="text-4xl font-bold text-gray-800 ">My Applied Jobs</h2>
+          <h2 className="text-2xl lg:text-4xl font-bold text-gray-800 ">
+            My Applied Jobs
+          </h2>
 
           <span className="px-3 py-1 text-xs text-white bg-btn-color rounded-full ">
             {jobs.length} Job
@@ -77,14 +79,18 @@ function AppliedJobs() {
                           <div className="flex items-center gap-x-2">
                             <p
                               className={`px-3 py-1 ${
-                                job.jobCategory === "Web Development" &&
-                                "text-blue-500 bg-blue-100/60"
+                                job.job_category === "On Site" &&
+                                "text-blue-700 bg-blue-100/60"
                               } ${
-                                job.jobCategory === "Graphics Design" &&
-                                "text-emerald-500 bg-emerald-100/60"
+                                job.job_category === "Remote" &&
+                                "text-emerald-700 bg-emerald-100/60"
                               } ${
-                                job.jobCategory === "Digital Marketing" &&
-                                "text-pink-500 bg-pink-100/60"
+                                job.job_category === "Hybrid" &&
+                                "text-pink-700 bg-pink-100/60"
+                              } 
+                              } ${
+                                job.job_category === "Part Time" &&
+                                "text-orange-700 bg-orange-100/60"
                               } text-xs  rounded-full`}
                             >
                               {job.jobCategory}

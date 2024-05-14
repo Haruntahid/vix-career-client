@@ -15,11 +15,11 @@ function Recommanded() {
 
   return (
     <>
-      <div className="mt-28 container mx-auto">
+      <div className="mt-14 lg:mt-28 container mx-auto">
         <h1 className="text-2xl font-semibold text-center text-txt-color capitalize lg:text-4xl ">
           Recommanded <span className="text-btn-color">Companies</span>
         </h1>
-        <div className="grid gap-5 lg:grid-cols-3 mt-10">
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3 mt-10">
           {companies.map((company) => (
             <CompanyCard key={company._id} company={company} />
           ))}

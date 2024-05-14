@@ -77,6 +77,17 @@ function Navbar() {
                 <NavLink to={"/blogs"}>Blogs</NavLink>
               </li>
 
+              {user && (
+                <li>
+                  <NavLink
+                    className="btn text-xs bg-btn-color"
+                    onClick={logOut}
+                  >
+                    Logout
+                  </NavLink>
+                </li>
+              )}
+
               {!user && (
                 <li>
                   <NavLink to={"/register"}>Register</NavLink>
@@ -86,7 +97,7 @@ function Navbar() {
           </div>
           <Link
             to={"/"}
-            className="btn btn-ghost text-4xl font-bold text-btn-color"
+            className="btn btn-ghost text-xl lg:text-4xl font-bold text-btn-color"
           >
             VixCareer
           </Link>
@@ -170,7 +181,7 @@ function Navbar() {
 
               <button
                 onClick={logOut}
-                className="btn ml-4 bg-btn-color text-white hover:bg-black"
+                className="btn ml-4 bg-btn-color text-white hover:bg-black hidden lg:block"
               >
                 Logout
               </button>

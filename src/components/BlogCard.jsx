@@ -12,9 +12,9 @@ function BlogCard({ blog }) {
             <a
               rel="noopener noreferrer"
               href="#"
-              className="px-2 py-1 font-bold rounded bg-violet-400 text-gray-900"
+              className="px-2 py-1 font-bold rounded bg-btn-color text-gray-900"
             >
-              {hashtag.split()}
+              {hashtag}
             </a>
           </div>
           <div className="mt-3">
@@ -28,7 +28,7 @@ function BlogCard({ blog }) {
             <p className="mt-2">{description}</p>
           </div>
           <div className="flex items-center justify-between mt-4">
-            <Link to={`${_id}`} className="hover:underline text-violet-400">
+            <Link to={`${_id}`} className="hover:underline text-btn-color">
               Read more
             </Link>
             <div>

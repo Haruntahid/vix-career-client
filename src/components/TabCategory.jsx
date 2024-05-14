@@ -12,19 +12,18 @@ function TabCategory() {
     );
   }, []);
   return (
-    <div className="mt-20 container mx-auto">
-      <h1 className="text-2xl font-semibold text-center text-txt-color capitalize lg:text-4xl ">
+    <div className="mt-10 lg:mt-20 container mx-auto">
+      <h1 className="text-2xl font-semibold text-center text-txt-color capitalize lg:text-4xl">
         Explore Jobs By <span className="text-btn-color">Categories</span>
       </h1>
 
       <p className="max-w-2xl mx-auto my-6 text-center text-gray-500 ">
-        Three categories available for the time being. They are Web Development,
-        Graphics Design and Digital Marketing. Browse them by clicking on the
-        tabs below.
+        There are four categories of jobs in out site you can choose what you
+        need
       </p>
       <Tabs>
         <div className="flex items-center justify-center">
-          <TabList>
+          <TabList className="text-xs lg:text-[16px]">
             <Tab>On-Site Job</Tab>
             <Tab>Remote Job</Tab>
             <Tab>Hybrid</Tab>
@@ -33,7 +32,7 @@ function TabCategory() {
         </div>
 
         <TabPanel>
-          <div className="grid grid-cols-3 gap-5 mt-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-6">
             {jobs
               .filter((j) => j.job_category === "On Site")
               .map((job) => (
@@ -42,7 +41,7 @@ function TabCategory() {
           </div>
         </TabPanel>
         <TabPanel>
-          <div className="grid grid-cols-3 gap-5 mt-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-6">
             {jobs
               .filter((j) => j.job_category === "Remote")
               .map((job) => (
@@ -51,7 +50,7 @@ function TabCategory() {
           </div>
         </TabPanel>
         <TabPanel>
-          <div className="grid grid-cols-3 gap-5 mt-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-6">
             {jobs
               .filter((j) => j.job_category === "Hybrid")
               .map((job) => (
@@ -60,7 +59,7 @@ function TabCategory() {
           </div>
         </TabPanel>
         <TabPanel>
-          <div className="grid grid-cols-3 gap-5 mt-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-6">
             {jobs
               .filter((j) => j.job_category === "Part Time")
               .map((job) => (

@@ -14,7 +14,7 @@ function JobCard({ job }) {
   } = job;
   return (
     <>
-      <div className="p-5 rounded-xl bg-bg-color shadow-md">
+      <div className="p-3 lg:p-5 rounded-xl bg-bg-color shadow-md">
         <p className="my-2 text-[16px] font-medium">
           Posted on : {job_posting_date}
         </p>
@@ -27,11 +27,11 @@ function JobCard({ job }) {
               year: "numeric",
             })}
           </p>
-          <p className="px-4 text-xs py-1 rounded-full text-blue-500 bg-blue-100/60">
+          <p className="px-4 text-xs py-1 rounded-full text-txt-color bg-btn-color">
             {job_category}
           </p>
         </div>
-        <p className="text-2xl font-semibold my-3">{job_title}</p>
+        <p className="text-2xl font-semibold my-2 lg:my-3">{job_title}</p>
         <p className="text-[16px] text-gray-500 font-bold">
           Salary : {salary_range}
         </p>

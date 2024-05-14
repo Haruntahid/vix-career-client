@@ -32,7 +32,7 @@ function AllJobs() {
 
   return (
     <div className="container mx-auto">
-      <div className="grid grid-cols-2 gap-5 mt-10">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mt-10">
         {jobs.map((job) => (
           <JobCard key={job._id} job={job} />
         ))}
@@ -41,7 +41,7 @@ function AllJobs() {
       <div className="flex justify-center items-center mt-20">
         <button
           disabled={currentPage === 0}
-          className="btn bg-btn-color"
+          className="btn bg-btn-color text-white"
           onClick={() => handlePaginationButton(currentPage - 1)}
         >
           Prev
@@ -56,7 +56,7 @@ function AllJobs() {
           </button>
         ))}
         <button
-          className="btn bg-btn-color"
+          className="btn bg-btn-color text-white"
           disabled={currentPage === numberOfPages}
           onClick={() => handlePaginationButton(currentPage + 1)}
         >

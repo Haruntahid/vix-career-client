@@ -18,7 +18,7 @@ function TabCategory() {
       </h1>
 
       <p className="max-w-2xl mx-auto my-6 text-center text-gray-500 ">
-        There are four categories of jobs in out site you can choose what you
+        There are four categories of jobs in our site you can choose what you
         need
       </p>
       <Tabs>

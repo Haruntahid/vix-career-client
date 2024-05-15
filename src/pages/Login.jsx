@@ -5,6 +5,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import useAuth from "../hooks/useAuth";
 import axios from "axios";
+import { Helmet } from "react-helmet-async";
 
 function Login() {
   const { signIn, googleLogin, setUser } = useAuth();
@@ -88,6 +89,9 @@ function Login() {
 
   return (
     <>
+      <Helmet>
+        <title>Vix-Career | Login</title>
+      </Helmet>
       <div className="flex justify-center items-center my-12">
         <div className="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg  lg:max-w-6xl ">
           <div

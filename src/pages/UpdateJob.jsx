@@ -6,12 +6,14 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 function UpdateJob() {
   const job = useLoaderData();
-  //   console.log(job);
   const { user } = useAuth();
-  const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(
+    new Date(job.application_deadline)
+  );
   const navigate = useNavigate();
 
   const {
@@ -21,11 +23,10 @@ function UpdateJob() {
     job_category,
     salary_range,
     job_posting_date,
-    application_deadline,
     short_description,
   } = job;
 
-  // handel update Post job
+  // Handle update Post job
   const handelUpdatePostJob = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -79,16 +80,20 @@ function UpdateJob() {
       return;
     }
   };
+
   return (
     <>
+      <Helmet>
+        <title>Vix-Career | Update-job</title>
+      </Helmet>
       <h2 className="text-3xl lg:text-6xl text-btn-color font-bold text-center my-5 lg:my-10">
         Update Job Details
       </h2>
       <div className="container mx-auto bg-bg-color p-5 rounded-lg shadow-2xl">
         <form onSubmit={handelUpdatePostJob} className="space-y-2 lg:space-y-6">
-          {/* user row*/}
-          <div className="flex gap-2 lg:gap-5">
-            <div className="w-1/2">
+          {/* user row */}
+          <div className="flex flex-col lg:flex-row gap-2 lg:gap-5">
+            <div className="w-full lg:w-1/2">
               <label className="text-btn-color block mb-2">Name:</label>
               <input
                 type="text"
@@ -99,7 +104,7 @@ function UpdateJob() {
                 className="input input-bordered w-full"
               />
             </div>
-            <div className="w-1/2">
+            <div className="w-full lg:w-1/2">
               <label className="text-btn-color block mb-2">Email:</label>
               <input
                 placeholder="Email"
@@ -112,8 +117,8 @@ function UpdateJob() {
             </div>
           </div>
           {/* row 1 */}
-          <div className="flex gap-2 lg:gap-5">
-            <div className="w-1/2">
+          <div className="flex flex-col lg:flex-row gap-2 lg:gap-5">
+            <div className="w-full lg:w-1/2">
               <label className="text-btn-color block mb-2">PhotoURL:</label>
               <input
                 type="text"
@@ -123,7 +128,7 @@ function UpdateJob() {
                 className="input input-bordered w-full"
               />
             </div>
-            <div className="w-1/2">
+            <div className="w-full lg:w-1/2">
               <label className="text-btn-color block mb-2">Job Title:</label>
               <input
                 type="text"
@@ -135,8 +140,8 @@ function UpdateJob() {
             </div>
           </div>
           {/* row 2 */}
-          <div className="flex gap-2 lg:gap-5">
-            <div className="w-1/2">
+          <div className="flex flex-col lg:flex-row gap-2 lg:gap-5">
+            <div className="w-full lg:w-1/2">
               <label className="text-btn-color block mb-2">Job Category:</label>
               <select
                 id="Job Category"
@@ -158,7 +163,7 @@ function UpdateJob() {
                 </option>
               </select>
             </div>
-            <div className="w-1/2">
+            <div className="w-full lg:w-1/2">
               <label className="text-btn-color block mb-2">Salary range:</label>
               <input
                 placeholder="Salary range"
@@ -170,8 +175,8 @@ function UpdateJob() {
             </div>
           </div>
           {/* row 3 */}
-          <div className="flex gap-2 lg:gap-5">
-            <div className="w-1/2">
+          <div className="flex flex-col lg:flex-row gap-2 lg:gap-5">
+            <div className="w-full lg:w-1/2">
               <label className="text-btn-color block mb-2">
                 Job Posting Date:
               </label>
@@ -184,15 +189,15 @@ function UpdateJob() {
                 className="input input-bordered w-full"
               />
             </div>
-            <div className="w-1/2">
-              <div className="w-1/2">
+            <div className="w-full lg:w-1/2">
+              <div className="w-full lg:w-1/2">
                 <label className="text-btn-color block mb-2">
                   Application Deadline:
                 </label>
                 <DatePicker
                   dateFormat="dd/MM/yyyy"
-                  className="min-w-full flex rounded-lg border border-gray-300 px-4 lg:h-[48px]"
-                  selected={application_deadline}
+                  className="min-w-full flex rounded-lg border border-gray-300 px-4 h-[48px]"
+                  selected={startDate}
                   onChange={(date) => setStartDate(date)}
                 />
               </div>

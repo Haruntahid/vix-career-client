@@ -6,6 +6,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 function AddJob() {
   const { user } = useAuth();
@@ -81,6 +82,9 @@ function AddJob() {
   };
   return (
     <>
+      <Helmet>
+        <title>Vix-Career | Add-Jobs</title>
+      </Helmet>
       <h2 className="text-3xl lg:text-6xl text-btn-color font-bold text-center my-5 lg:my-10">
         Post a Job
       </h2>

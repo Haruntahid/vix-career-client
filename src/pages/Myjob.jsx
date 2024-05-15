@@ -3,6 +3,7 @@ import useAuth from "../hooks/useAuth";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 function Myjob() {
   const { user } = useAuth();
@@ -50,6 +51,9 @@ function Myjob() {
 
   return (
     <>
+      <Helmet>
+        <title>Vix-Career | My-Jobs</title>
+      </Helmet>
       <section className="container px-4 mx-auto pt-12">
         <div className="flex items-center justify-center gap-x-3">
           <h2 className="text-2xl lg:text-4xl font-bold text-gray-800">
@@ -177,7 +181,7 @@ function Myjob() {
 
                             <Link
                               to={`/update/${job._id}`}
-                              className="text-gray-500 transition-colors duration-200hover:text-yellow-800 focus:outline-none"
+                              className="text-gray-500 transition-colors duration-200 hover:text-yellow-600 focus:outline-none"
                             >
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"

@@ -1,11 +1,13 @@
+import { Helmet } from "react-helmet-async";
 import BlogCard from "../components/BlogCard";
 import { useLoaderData } from "react-router-dom";
-// import { useState } from "react";
 function Blog() {
   const blogs = useLoaderData();
-  console.log(blogs);
   return (
     <>
+      <Helmet>
+        <title>Vix-Career | Blogs</title>
+      </Helmet>
       <div className="container mx-auto">
         <div className="bg-btn-color px-10 rounded-2xl flex items-center justify-between mt-10">
           <p className="lg:text-6xl text-txt-color font-bold">

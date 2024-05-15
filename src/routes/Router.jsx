@@ -43,7 +43,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/my-job",
-        element: <Myjob />,
+        element: (
+          <PrivateRoute>
+            <Myjob />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/profile",

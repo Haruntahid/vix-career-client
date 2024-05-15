@@ -15,7 +15,8 @@ function AppliedJobs() {
         const { data } = await axios.get(
           `${import.meta.env.VITE_API_URL}/my-apply/${user?.email}${
             filter ? `?filter=${filter}` : ""
-          }`
+          }`,
+          { withCredentials: true }
         );
         console.log("Fetched data:", data);
         setJobs(data);
@@ -41,20 +42,20 @@ function AppliedJobs() {
       <section className="container px-4 mx-auto pt-12">
         <div className="flex items-center justify-center gap-x-3">
           <h2 className="text-2xl lg:text-4xl font-bold text-gray-800 ">
-            My Applied Jobs
+            Applied Jobs
           </h2>
 
           <span className="px-3 py-1 text-xs text-white bg-btn-color rounded-full ">
             {jobs.length} Job{jobs.length !== 1 && "s"}
           </span>
         </div>
-        <div className="my-8">
+        <div className="my-8 flex justify-center lg:justify-end">
           <select
             onChange={handleFilterChange}
             value={filter}
             id="Job Category"
             name="job_category"
-            className="block w-full px-4 py-3 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-500"
+            className="block px-4 py-3 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-500"
           >
             <option value="" className="py-2">
               All
@@ -125,17 +126,17 @@ function AppliedJobs() {
                           <div className="flex items-center gap-x-2">
                             <p
                               className={`px-3 py-1 ${
-                                job.job_category === "On Site" &&
+                                job.jobCategory === "On Site" &&
                                 "text-blue-700 bg-blue-100/60"
                               } ${
-                                job.job_category === "Remote" &&
+                                job.jobCategory === "Remote" &&
                                 "text-emerald-700 bg-emerald-100/60"
                               } ${
-                                job.job_category === "Hybrid" &&
+                                job.jobCategory === "Hybrid" &&
                                 "text-pink-700 bg-pink-100/60"
                               } 
                               ${
-                                job.job_category === "Part Time" &&
+                                job.jobCategory === "Part Time" &&
                                 "text-orange-700 bg-orange-100/60"
                               } text-xs  rounded-full`}
                             >
@@ -146,7 +147,7 @@ function AppliedJobs() {
                         <td className="px-4 py-4 text-sm whitespace-nowrap">
                           <Link
                             to={`/job/${job.jobId}`}
-                            className="btn bg-btn-color hover:bg-txt-color text-white"
+                            className="px-5 py-2 text-[16px] font-semibold bg-btn-color hover:bg-txt-color text-white"
                           >
                             View Details
                           </Link>
